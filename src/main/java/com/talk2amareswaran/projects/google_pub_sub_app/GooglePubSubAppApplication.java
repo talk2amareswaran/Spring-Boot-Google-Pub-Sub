@@ -4,14 +4,15 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.gcp.pubsub.core.PubSubOperations;
-import org.springframework.cloud.gcp.pubsub.support.GcpHeaders;
+import org.springframework.cloud.gcp.pubsub.integration.AckMode;
+import org.springframework.cloud.gcp.pubsub.integration.inbound.PubSubInboundChannelAdapter;
+import org.springframework.cloud.gcp.pubsub.integration.outbound.PubSubMessageHandler;
+import org.springframework.cloud.gcp.pubsub.support.GcpPubSubHeaders;
 import org.springframework.context.annotation.Bean;
 import org.springframework.integration.annotation.MessagingGateway;
 import org.springframework.integration.annotation.ServiceActivator;
 import org.springframework.integration.channel.DirectChannel;
-import org.springframework.integration.gcp.pubsub.AckMode;
-import org.springframework.integration.gcp.pubsub.inbound.PubSubInboundChannelAdapter;
-import org.springframework.integration.gcp.pubsub.outbound.PubSubMessageHandler;
+
 import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.MessageHandler;
 
@@ -46,7 +47,7 @@ public class GooglePubSubAppApplication {
 	public MessageHandler messageReceiver() {
 		return message -> {
 			System.out.println("Message Received::" + message.getPayload());
-			AckReplyConsumer consumer = (AckReplyConsumer) message.getHeaders().get(GcpHeaders.ACKNOWLEDGEMENT);
+			AckReplyConsumer consumer = (AckReplyConsumer) message.getHeaders().get(GcpPubSubHeaders.ACKNOWLEDGEMENT);
 			consumer.ack();
 		};
 	}
