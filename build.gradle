@@ -21,7 +21,7 @@ sourceCompatibility = 1.8
 repositories {
 	mavenCentral()
 	 maven {
-        url "http://repo.spring.io/snapshot"
+         url "https://repo.spring.io/libs-milestone"
     }
 }
 
@@ -29,6 +29,6 @@ repositories {
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter-web')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
-	compile("org.springframework.cloud:spring-cloud-gcp-starter-pubsub:1.0.0.BUILD-SNAPSHOT")
-    compile("org.springframework.cloud:spring-integration-gcp:1.0.0.BUILD-SNAPSHOT")
+	  compile("org.springframework.cloud:spring-cloud-gcp-starter-pubsub:1.0.0.M3")
+    compile("org.springframework.integration:spring-integration-core")
 }
